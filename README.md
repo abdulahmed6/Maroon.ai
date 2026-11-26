@@ -6,6 +6,8 @@ The UI is **server-driven**: the dashboard renders whatever typed widgets the da
 
 Built with [Lovable](https://lovable.dev) on TanStack Start.
 
+**Live demo:** https://maroon-ai.ahmedabdiaziz389.workers.dev (tap **Try the demo**, no account needed)
+
 ## Tech stack
 
 | Area | Choice |
@@ -116,7 +118,7 @@ These rules are also in [`AGENTS.md`](./AGENTS.md):
 
 ## Live demo and hosting
 
-**Try it:** open the hosted app and tap **Try the demo** on the sign-in screen. No account is needed; you see the app as Sophia Rodriguez, a sample CS junior, and the first-visit tour starts.
+**Try it:** open [maroon-ai.ahmedabdiaziz389.workers.dev](https://maroon-ai.ahmedabdiaziz389.workers.dev) and tap **Try the demo** on the sign-in screen. No account is needed; you see the app as Sophia Rodriguez, a sample CS junior, and the first-visit tour starts.
 
 ### Guest demo mode
 
@@ -124,13 +126,13 @@ These rules are also in [`AGENTS.md`](./AGENTS.md):
 
 ### Deploy to Cloudflare Workers
 
-`bun run build` already targets Cloudflare (Nitro), and `wrangler.jsonc` names the Worker `gopher-companion`.
+`bun run build` already targets Cloudflare (Nitro), and `wrangler.jsonc` names the Worker `maroon-ai`.
 
 One-time setup (free plan):
 
 1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Import a repository** → pick this repo.
 2. Build command `bun run build`, deploy command `npx wrangler deploy`. Leave the root directory empty.
-3. Deploy. The app is served at `https://gopher-companion.<your-subdomain>.workers.dev`, and every push to `main` redeploys.
+3. Deploy. The app is served at `https://maroon-ai.<your-subdomain>.workers.dev`, and every push to `main` redeploys.
 
 Optional secrets (Worker → Settings → Variables and Secrets): `ANTHROPIC_API_KEY` turns on live Claude answers for Goldy. On a public link, anyone can spend that key, so set a spend limit in the Claude Console first or leave it unset.
 

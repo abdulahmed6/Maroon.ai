@@ -2,7 +2,7 @@
 // .output/server/wrangler.json, and `npx wrangler deploy` publishes that build.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "gopher-companion",
+  "name": "maroon-ai",
   "compatibility_date": "2026-09-01",
   "compatibility_flags": ["nodejs_compat"]
 }
