@@ -6,6 +6,8 @@ The UI is **server-driven**: the dashboard renders whatever typed widgets the da
 
 Built with [Lovable](https://lovable.dev) on TanStack Start.
 
+**Live demo:** https://maroon-ai.ahmedabdiaziz389.workers.dev (tap **Try the demo**, no account needed)
+
 ## Tech stack
 
 | Area | Choice |
@@ -116,7 +118,7 @@ These rules are also in [`AGENTS.md`](./AGENTS.md):
 
 ## Live demo and hosting
 
-**Try it:** open the hosted app and tap **Try the demo** on the sign-in screen. No account is needed; you see the app as Sophia Rodriguez, a sample CS junior, and the first-visit tour starts.
+**Try it:** open [maroon-ai.ahmedabdiaziz389.workers.dev](https://maroon-ai.ahmedabdiaziz389.workers.dev) and tap **Try the demo** on the sign-in screen. No account is needed; you see the app as Sophia Rodriguez, a sample CS junior, and the first-visit tour starts.
 
 ### Guest demo mode
 
