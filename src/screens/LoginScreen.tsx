@@ -6,11 +6,12 @@ import {
   INPUT,
   PasswordField,
   PRIMARY_BUTTON,
+  SECONDARY_BUTTON,
 } from "@/components/Auth/AuthShell";
 import { useAuth } from "@/hooks/useAuth";
 
 export function LoginScreen() {
-  const { login } = useAuth();
+  const { login, startDemo } = useAuth();
   const [internetId, setInternetId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -66,6 +67,14 @@ export function LoginScreen() {
           </Link>
         </p>
       </form>
+      <div className="mt-6 border-t border-border pt-6 text-center">
+        <button type="button" onClick={startDemo} className={SECONDARY_BUTTON}>
+          Try the demo
+        </button>
+        <p className="mt-2 text-xs text-muted-foreground">
+          No account needed. You&apos;ll see the app as Sophia, a sample CS junior.
+        </p>
+      </div>
     </AuthShell>
   );
 }

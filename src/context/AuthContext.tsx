@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { authService } from "@/services/authService";
+import { demoSession } from "@/services/demoSession";
 import { profileService } from "@/services/profileService";
 import type { AuthSession, ProfileUpdate, SignUpDetails } from "@/types";
 import { AuthContext, type AuthContextValue } from "./authContextValue";
@@ -11,6 +12,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Restore the Supabase session after hydration to avoid SSR mismatches.
   useEffect(() => {
     let active = true;
+    const demo = demoSession.restore();
+    if (demo) {
+      setSession(demo);
+      setIsReady(true);
+      return () => {
+        active = false;
+      };
+    }
     authService
       .getSession()
       .then((restored) => {
@@ -39,18 +48,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setSession(await authService.signUp(details));
   }, []);
 
+  const startDemo = useCallback(() => {
+    setSession(demoSession.start());
+  }, []);
+
   const studentId = session?.student.id;
+  const isDemo = demoSession.isDemoUser(studentId);
   const updateProfile = useCallback(
     async (update: ProfileUpdate) => {
       if (!studentId) throw new Error("You're signed out. Sign in again.");
-      const student = await profileService.update(studentId, update);
+      const student = isDemo
+        ? demoSession.update(update)
+        : await profileService.update(studentId, update);
       setSession((current) => (current ? { ...current, student } : current));
     },
-    [studentId],
+    [studentId, isDemo],
   );
 
   const logout = useCallback(() => {
     setSession(null);
+    demoSession.end();
     void authService.signOut();
   }, []);
 
@@ -63,10 +80,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       needsOnboarding: Boolean(session && !session.student.onboardedAt),
       login,
       signUp,
+      startDemo,
+      isDemo,
       updateProfile,
       logout,
     }),
-    [session, isReady, login, signUp, updateProfile, logout],
+    [session, isReady, login, signUp, startDemo, isDemo, updateProfile, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

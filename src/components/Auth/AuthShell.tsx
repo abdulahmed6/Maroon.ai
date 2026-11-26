@@ -7,6 +7,9 @@ export const INPUT =
 export const PRIMARY_BUTTON =
   "tap-highlight-none w-full rounded-lg bg-primary py-3.5 text-sm font-semibold text-primary-foreground transition-opacity active:opacity-80 disabled:opacity-60";
 
+export const SECONDARY_BUTTON =
+  "tap-highlight-none w-full rounded-lg border border-primary py-3.5 text-sm font-semibold text-primary transition-opacity active:opacity-80";
+
 /** Maroon hero on top, rounded sheet below. Shared by sign-in, sign-up and onboarding. */
 export function AuthShell({
   title,

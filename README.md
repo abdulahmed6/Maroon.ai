@@ -114,6 +114,28 @@ These rules are also in [`AGENTS.md`](./AGENTS.md):
 - **Keep route files thin.** Screens belong in `src/screens/*`. `src/routes/*` only declares head metadata and the component. Don't edit `routeTree.gen.ts`, which is generated. See [`src/routes/README.md`](./src/routes/README.md) for routing conventions.
 - **Theme**: UMN maroon (`#6B2D3B`) primary with a gold accent, defined as semantic tokens in `src/styles.css`. Fonts are Sora (headings) and Manrope (body).
 
+## Live demo and hosting
+
+**Try it:** open the hosted app and tap **Try the demo** on the sign-in screen. No account is needed; you see the app as Sophia Rodriguez, a sample CS junior, and the first-visit tour starts.
+
+### Guest demo mode
+
+`src/services/demoSession.ts` keeps a demo session in `localStorage` (`maroon.demo.session`) instead of Supabase. `AuthContext` restores it on load, routes profile edits to it, and clears it on **Exit demo**. Academics, payments and clubs already come from the curated mock data (`DEMO_MODE` in `src/services/demo.ts`). Goldy answers from the offline mock assistant unless `ANTHROPIC_API_KEY` is set on the server.
+
+### Deploy to Cloudflare Workers
+
+`bun run build` already targets Cloudflare (Nitro), and `wrangler.jsonc` names the Worker `gopher-companion`.
+
+One-time setup (free plan):
+
+1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Import a repository** → pick this repo.
+2. Build command `bun run build`, deploy command `npx wrangler deploy`. Leave the root directory empty.
+3. Deploy. The app is served at `https://gopher-companion.<your-subdomain>.workers.dev`, and every push to `main` redeploys.
+
+Optional secrets (Worker → Settings → Variables and Secrets): `ANTHROPIC_API_KEY` turns on live Claude answers for Goldy. On a public link, anyone can spend that key, so set a spend limit in the Claude Console first or leave it unset.
+
+Deploy from your machine instead: `bun run build && npx wrangler login && npx wrangler deploy`.
+
 ## Roadmap / TODOs
 
 - Replace mock sign-in with a real UMN SSO exchange (`AuthContext.login`).
