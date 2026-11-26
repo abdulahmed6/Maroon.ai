@@ -7,7 +7,7 @@ import { useDashboard } from "@/hooks/useDashboard";
 import { canvasService } from "@/services/canvasService";
 
 export function AccountScreen() {
-  const { student, logout, updateProfile } = useAuth();
+  const { student, logout, updateProfile, isDemo } = useAuth();
   const navigate = useNavigate();
   const { refresh } = useDashboard();
   const [error, setError] = useState<string | null>(null);
@@ -82,7 +82,7 @@ export function AccountScreen() {
           onClick={logout}
           className="tap-highlight-none w-full rounded-lg border border-input py-3 text-sm font-semibold text-destructive"
         >
-          Sign out
+          {isDemo ? "Exit demo" : "Sign out"}
         </button>
       </div>
     </>

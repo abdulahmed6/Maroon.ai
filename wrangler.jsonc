@@ -1,0 +1,8 @@
+// Cloudflare Workers config. `bun run build` (Nitro, Cloudflare target) merges this into
+// .output/server/wrangler.json, and `npx wrangler deploy` publishes that build.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gopher-companion",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"]
+}

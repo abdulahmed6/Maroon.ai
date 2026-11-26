@@ -14,6 +14,10 @@ export interface AuthContextValue {
   needsOnboarding: boolean;
   login: (internetId: string, password: string) => Promise<void>;
   signUp: (details: SignUpDetails) => Promise<void>;
+  /** Opens the app as the Sophia Rodriguez guest demo, with no account. */
+  startDemo: () => void;
+  /** True while the guest demo session is active. */
+  isDemo: boolean;
   updateProfile: (update: ProfileUpdate) => Promise<void>;
   logout: () => void;
 }
